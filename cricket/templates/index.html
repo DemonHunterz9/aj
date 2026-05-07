@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cricket Management System</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#0b1220;
+color:white;
+}
+
+/* Navbar */
+
+nav{
+display:flex;
+justify-content:space-between;
+padding:20px 60px;
+background:#07111f;
+position:sticky;
+top:0;
+}
+
+.logo{
+font-size:30px;
+font-weight:bold;
+color:#38bdf8;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:30px;
+}
+
+/* Hero */
+
+.hero{
+display:grid;
+grid-template-columns:1fr 1fr;
+align-items:center;
+gap:50px;
+padding:70px 60px;
+}
+
+.hero h1{
+font-size:60px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:22px;
+line-height:1.6;
+color:#cbd5e1;
+}
+
+.hero button{
+margin-top:30px;
+padding:16px 35px;
+background:#38bdf8;
+border:none;
+border-radius:15px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.hero img{
+width:100%;
+border-radius:25px;
+}
+
+
+/* Title */
+
+.section-title{
+text-align:center;
+font-size:42px;
+margin-top:30px;
+}
+
+
+/* Match Card */
+
+.live-card{
+width:92%;
+max-width:1100px;
+margin:40px auto;
+background:#111c30;
+padding:40px;
+border-radius:30px;
+box-shadow:0 10px 35px rgba(0,0,0,.4);
+}
+
+.scoreboard{
+display:flex;
+justify-content:space-around;
+align-items:center;
+}
+
+.team{
+font-size:36px;
+font-weight:bold;
+}
+
+.score{
+font-size:75px;
+font-weight:bold;
+color:#38bdf8;
+}
+
+
+/* User Input */
+
+.panel{
+background:#1e293b;
+padding:30px;
+border-radius:20px;
+margin-top:35px;
+}
+
+.panel h2{
+margin-bottom:20px;
+}
+
+.panel input{
+padding:15px;
+margin:10px;
+border:none;
+border-radius:10px;
+font-size:18px;
+}
+
+.big{
+width:45%;
+}
+
+.small{
+width:200px;
+}
+
+/* Buttons */
+
+button.action{
+padding:16px 30px;
+border:none;
+border-radius:14px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+margin:10px;
+}
+
+.one{
+background:#22c55e;
+}
+
+.four{
+background:#f59e0b;
+}
+
+.six{
+background:#ef4444;
+}
+
+.wicket{
+background:#475569;
+color:white;
+}
+
+.reset{
+background:#dc2626;
+color:white;
+}
+
+
+/* Quick controls */
+
+.controls{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-top:30px;
+}
+
+
+/* Stats */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+width:92%;
+margin:50px auto;
+}
+
+.stat{
+background:#111c30;
+padding:35px;
+border-radius:20px;
+text-align:center;
+}
+
+.stat h3{
+margin-bottom:10px;
+color:#94a3b8;
+}
+
+.stat p{
+font-size:48px;
+color:#38bdf8;
+font-weight:bold;
+}
+
+
+/* Players */
+
+.players{
+padding:60px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:35px;
+}
+
+.card{
+background:#111c30;
+padding:30px;
+border-radius:20px;
+text-align:center;
+}
+
+
+/* Footer */
+
+footer{
+margin-top:50px;
+padding:30px;
+background:#07111f;
+text-align:center;
+}
+
+
+/* Mobile */
+
+@media(max-width:900px){
+
+.hero,.controls,.stats,.grid{
+grid-template-columns:1fr;
+}
+
+.hero{
+text-align:center;
+}
+
+.scoreboard{
+flex-direction:column;
+gap:20px;
+}
+
+.big{
+width:90%;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<nav>
+<div class="logo">
+🏏 CricManager
+</div>
+
+<ul>
+<li>Home</li>
+<li>Live</li>
+<li>Players</li>
+<li>Schedule</li>
+</ul>
+
+</nav>
+
+
+
+<section class="hero">
+
+<div>
+
+<h1>
+Cricket Management System
+</h1>
+
+<p>
+Manage live scores, player statistics,
+manual scoring and distributed updates.
+</p>
+
+<button onclick="document.getElementById('live').scrollIntoView()">
+Open Live Match
+</button>
+
+</div>
+
+
+<img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e">
+
+</section>
+
+
+
+<h1 class="section-title" id="live">
+Live Match Center
+</h1>
+
+
+<div class="live-card">
+
+<div class="scoreboard">
+
+<div class="team" id="team1Name">
+India
+</div>
+
+<div>
+<div class="score" id="score">
+0/0
+</div>
+
+<h2 id="overs">
+Overs 0.0
+</h2>
+</div>
+
+<div class="team" id="team2Name">
+Australia
+</div>
+
+</div>
+
+
+
+<div class="panel">
+
+<h2>Manual User Input</h2>
+
+<input
+id="team1"
+class="big"
+placeholder="Team 1">
+
+<input
+id="team2"
+class="big"
+placeholder="Team 2">
+
+<br>
+
+<input
+id="customRuns"
+type="number"
+class="small"
+placeholder="Enter Runs">
+
+<button
+class="action one"
+onclick="addCustomRuns()">
+Add Runs
+</button>
+
+<button
+class="action wicket"
+onclick="updateScore(0,true)">
+Wicket
+</button>
+
+<button
+class="action four"
+onclick="updateTeams()">
+Update Teams
+</button>
+
+<button
+class="action reset"
+onclick="resetMatch()">
+Reset
+</button>
+
+
+</div>
+
+
+
+<div class="controls">
+
+<button
+class="action one"
+onclick="updateScore(1,false)">
++1
+</button>
+
+<button
+class="action four"
+onclick="updateScore(4,false)">
+FOUR
+</button>
+
+<button
+class="action six"
+onclick="updateScore(6,false)">
+SIX
+</button>
+
+<button
+class="action wicket"
+onclick="updateScore(0,true)">
+WICKET
+</button>
+
+</div>
+
+
+</div>
+
+
+
+<div class="stats">
+
+<div class="stat">
+<h3>Total Runs</h3>
+<p id="runsBox">
+0
+</p>
+</div>
+
+<div class="stat">
+<h3>Wickets</h3>
+<p id="wicketsBox">
+0
+</p>
+</div>
+
+<div class="stat">
+<h3>Run Rate</h3>
+<p id="rr">
+0.00
+</p>
+</div>
+
+</div>
+
+
+
+<section class="players">
+
+<h1 class="section-title">
+Star Players
+</h1>
+
+<div class="grid">
+
+<div class="card">
+<h2>Virat Kohli</h2>
+<p>Runs : 13872</p>
+<p>Average : 57.2</p>
+</div>
+
+<div class="card">
+<h2>Ajinkya</h2>
+<p>Runs : 10890</p>
+<p>Average : 49.1</p>
+</div>
+
+<div class="card">
+<h2>Bumrah</h2>
+<p>Wickets : 320</p>
+<p>Economy : 4.6</p>
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+Distributed Systems Mini Project
+</footer>
+
+
+<script>
+
+async function loadScore(){
+
+let r=await fetch('/score');
+
+let d=await r.json();
+
+document.getElementById(
+"team1Name"
+).innerText=d.team1;
+
+document.getElementById(
+"team2Name"
+).innerText=d.team2;
+
+
+document.getElementById(
+"score"
+).innerText=
+d.runs+"/"+d.wickets;
+
+
+document.getElementById(
+"runsBox"
+).innerText=d.runs;
+
+
+document.getElementById(
+"wicketsBox"
+).innerText=d.wickets;
+
+
+let overs=
+Math.floor(d.balls/6)+"."+(d.balls%6);
+
+
+document.getElementById(
+"overs"
+).innerText=
+"Overs "+overs;
+
+
+let rr=
+d.balls>0
+?
+(d.runs/(d.balls/6)).toFixed(2)
+:
+"0.00";
+
+
+document.getElementById(
+"rr"
+).innerText=rr;
+
+}
+
+
+
+async function updateScore(run,wicket){
+
+await fetch('/update',{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify({
+runs:run,
+wicket:wicket
+})
+});
+
+loadScore();
+
+}
+
+
+
+function addCustomRuns(){
+
+let r=
+parseInt(
+document.getElementById(
+"customRuns"
+).value
+);
+
+if(!isNaN(r)){
+updateScore(r,false);
+document.getElementById(
+"customRuns"
+).value="";
+}
+
+}
+
+
+
+async function updateTeams(){
+
+let t1=
+document.getElementById(
+"team1"
+).value;
+
+let t2=
+document.getElementById(
+"team2"
+).value;
+
+
+await fetch('/teams',{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify({
+team1:t1,
+team2:t2
+})
+});
+
+loadScore();
+
+}
+
+
+
+async function resetMatch(){
+
+await fetch('/reset',{
+method:'POST'
+});
+
+loadScore();
+
+}
+
+
+loadScore();
+
+</script>
+
+</body>
+</html>

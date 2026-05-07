@@ -1,0 +1,11 @@
+Terminal 1:
+
+Step 1: Compile All Files
+  javac *.java
+  
+Step 2: Start the Server
+  java ArithmeticServer
+
+Terminal 2 :
+
+  java ArithmeticClient

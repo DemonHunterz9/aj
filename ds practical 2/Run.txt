@@ -1,0 +1,35 @@
+Step1 :Generate CORBA stubs from IDL
+
+idlj -fall Calculator.idl
+
+Step2 : Compile everything
+
+
+javac CalculatorApp/*.java CalculatorServer.java CalculatorClient.java
+
+Step3:
+
+Terminal 1 — Start Naming Service
+
+orbd -ORBInitialPort 1050 -ORBInitialHost localhost
+
+Terminal 2 — Start Server
+
+java CalculatorServer -ORBInitialPort 1050 -ORBInitialHost localhost
+
+Terminal 3 — Run Client
+
+java CalculatorClient -ORBInitialPort 1050 -ORBInitialHost localhost
+
+
+enviorment variable 
+vaiable=JAVA_HOME
+vaiable value=C:\Program Files\Java\jdk1.8.0_202
+
+
+system vaiables
+%JAVA_HOME%\bin 
+add this at top
+C:\Program Files\Java\jdk1.8.0_202
+remove all java path also in it
+
